@@ -8,21 +8,10 @@ function reverseString(date) {
 }
 
 // checks for palindrome
-function checkPalindromeForAllDateFormats(date) {
+function checkPalindrome(date) {
 
-    var datesList = dateConversionToString(date)
     var reverseDate = reverseString(date);
-
-    flag = false;
-    for (let i = 0; i < datesList.length; i++) {
-
-    }
-
-    //     if (date === reverseDate) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
+    return reverseDate === date
 }
 
 //converts the date from number to string
@@ -66,12 +55,82 @@ function dateFormats(date) {
 
     return formats
 }
+//Write a function that checks palindrome for all the date formats
+function checkPalindromeForAllDateFormats(date) {
+    var datesList = dateFormats(date);
+    var palindromeCheckList = [];
+
+    for (let i = 0; i < datesList.length; i++) {
+        var palindromeCheck = checkPalindrome(datesList[i])
+        palindromeCheckList.push(palindromeCheck)
+    }
+
+    return palindromeCheckList;
+}
+
+function isLeapYear(date) {
+    if (date.year % 400 === 0) {
+        return true
+    }
+
+    if (date.year % 100 === 0) {
+        return true
+    }
+
+    if (date.year % 4 == 0)
+        return true;
+    return false;
+}
+
+function getNextDate(date) {
+
+    const maxDatesinMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    date.day = Number(date.day) + 1
+
+    if (isLeapYear)
+        maxDatesinMonth[1] = 29;
+
+    if (date.day > maxDatesinMonth[date.month - 1]) {
+        date.day = '1'
+        date.month = Number(date.month) + 1
+    }
+
+    if (date.month > 12) {
+        date.month = '1'
+        date.year = Number(date.year) + 1
+    }
+    return date
+}
+
+function getNextPalindromeDate(date) {
+    var counter = 1;
+    var nextDate = getNextDate(date)
+
+    while (true) {
+        counter++;
+        var dateString = dateConversionToString(date);
+        var checkPalindromeList = checkPalindromeForAllDateFormats(dateString)
+        getNextDate(date);
+        counter++;
+
+        for (let i = 0; i < checkPalindromeList.length; i++) {
+            if (checkPalindromeList[i]) {
+                return [counter, nextDate];
+            }
+        }
+        nextDate = getNextDate(nextDate);
+    }
+}
+
+
+
 
 var date = {
-    day: 1,
-    month: 5,
+    day: 31,
+    month: 12,
     year: 2020
 }
 
 var dateString = dateConversionToString(date)
-console.log(dateFormats(dateString))
+console.log(checkPalindromeForAllDateFormats(dateString))
+console.log(getNextPalindromeDate(date))
