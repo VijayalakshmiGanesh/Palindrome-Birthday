@@ -1,3 +1,6 @@
+var birthday = document.querySelector("#birth-date")
+var submit = document.querySelector("#submit")
+var result = document.querySelector("#result")
 //reverse dates
 function reverseString(date) {
     var dateList = date.split("")
@@ -32,10 +35,10 @@ function dateConversionToString(date) {
     if (date.month < 10) {
         stringDate.month = '0' + date.month
     } else {
-        stringDate.month = date.month.toString()
+        stringDate.month = "" + date.month
     }
 
-    stringDate.year = date.year.toString()
+    stringDate.year = "" + date.year
 
     return stringDate
 }
@@ -74,32 +77,39 @@ function isLeapYear(date) {
     }
 
     if (date.year % 100 === 0) {
-        return true
+        return false
     }
 
-    if (date.year % 4 == 0)
+    if (date.year % 4 === 0)
         return true;
     return false;
 }
 
 function getNextDate(date) {
 
+    var day = date.day + 1;
+    var month = date.month;
+    var year = date.year;
+
     const maxDatesinMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-    date.day = Number(date.day) + 1
 
     if (isLeapYear)
         maxDatesinMonth[1] = 29;
 
-    if (date.day > maxDatesinMonth[date.month - 1]) {
-        date.day = '1'
-        date.month = Number(date.month) + 1
+    if (day > maxDatesinMonth[month - 1]) {
+        day = 1;
+        month++;
     }
 
-    if (date.month > 12) {
-        date.month = '1'
-        date.year = Number(date.year) + 1
+    if (month > 12) {
+        month = 1
+        year++;
     }
-    return date
+    return {
+        day: day,
+        month: month,
+        year: year
+    }
 }
 
 function getNextPalindromeDate(date) {
@@ -126,11 +136,48 @@ function getNextPalindromeDate(date) {
 
 
 var date = {
-    day: 31,
-    month: 12,
-    year: 2020
+
+    day: 07,
+    month: 7,
+    year: 2022
 }
 
 var dateString = dateConversionToString(date)
 console.log(checkPalindromeForAllDateFormats(dateString))
-console.log(getNextPalindromeDate(date))
+console.log(getNextDate(date))
+
+submit.addEventListener("click", clickHandler)
+
+function clickHandler() {
+
+    var date = {
+        day: Number(birthday.value.slice(8, 10)),
+        month: Number(birthday.value.slice(5, 7)),
+        year: Number(birthday.value.slice(0, 4))
+    }
+    console.log(date)
+    console.log(birthday.value)
+
+    var dateString = dateConversionToString(date)
+    var list = checkPalindromeForAllDateFormats(dateString)
+
+    var flag = false;
+    for (let i = 0; i < list.length; i++) {
+        if (list[i] === true) {
+            flag = true;
+            break;
+        }
+    }
+
+    if (flag === true) {
+        result.innerText = "YAYYYY .. your birthday is palindrome"
+        console.log("YAYYYY .. your birthday is palindrome")
+    } else {
+        var [ctr, nextPalindromeDate] = getNextPalindromeDate(dateString)
+
+        result.innerText = ` Not a Palindrome date. Next palindrome date comes in ${nextPalindromeDate.date} - ${nextPalindromeDate.month} - ${nextPalindromeDate.year} and you missed it by ${ctr} days1`
+
+        console.log(nextPalindromeDate)
+
+    }
+}
