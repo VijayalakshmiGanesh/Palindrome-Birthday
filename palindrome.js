@@ -1,3 +1,7 @@
+var birthday = document.querySelector("#birth-date")
+var submit = document.querySelector("#submit")
+var result = document.querySelector("#result")
+
 //reverse dates
 function reverseString(date) {
     var dateList = date.split("")
@@ -26,16 +30,16 @@ function dateConversionToString(date) {
     if (date.day < 10) {
         stringDate.day = '0' + date.day
     } else {
-        stringDate.day = date.day.toString()
+        stringDate.day = "" + date.day
     }
 
     if (date.month < 10) {
         stringDate.month = '0' + date.month
     } else {
-        stringDate.month = date.month.toString()
+        stringDate.month = "" + date.month
     }
 
-    stringDate.year = date.year.toString()
+    stringDate.year = "" + date.year
 
     return stringDate
 }
@@ -103,15 +107,13 @@ function getNextDate(date) {
 }
 
 function getNextPalindromeDate(date) {
-    var counter = 1;
+    var counter = 0;
     var nextDate = getNextDate(date)
 
     while (true) {
         counter++;
-        var dateString = dateConversionToString(date);
+        var dateString = dateConversionToString(nextDate);
         var checkPalindromeList = checkPalindromeForAllDateFormats(dateString)
-        getNextDate(date);
-        counter++;
 
         for (let i = 0; i < checkPalindromeList.length; i++) {
             if (checkPalindromeList[i]) {
@@ -125,12 +127,47 @@ function getNextPalindromeDate(date) {
 
 
 
-var date = {
-    day: 31,
-    month: 12,
-    year: 2020
-}
+// var date = {
+//     day: 31,
+//     month: 12,
+//     year: 2020
+// }
 
-var dateString = dateConversionToString(date)
-console.log(checkPalindromeForAllDateFormats(dateString))
-console.log(getNextPalindromeDate(date))
+// var dateString = dateConversionToString(date)
+// console.log(checkPalindromeForAllDateFormats(dateString))
+// console.log(getNextPalindromeDate(date))
+submit.addEventListener("click", clickHandler)
+
+function clickHandler() {
+
+    var date = {
+        day: Number(birthday.value.slice(8, 10)),
+        month: Number(birthday.value.slice(5, 7)),
+        year: Number(birthday.value.slice(0, 4))
+    }
+    console.log(date)
+    console.log(birthday.value)
+
+    var dateString = dateConversionToString(date)
+    var list = checkPalindromeForAllDateFormats(dateString)
+
+    var flag = false;
+    for (let i = 0; i < list.length; i++) {
+        if (list[i] === true) {
+            flag = true;
+            break;
+        }
+    }
+
+    if (flag === true) {
+        result.innerText = "YAYYYY .. your birthday is palindrome"
+        console.log("YAYYYY .. your birthday is palindrome")
+    } else {
+        var [ctr, nextPalindromeDate] = getNextPalindromeDate(dateString)
+
+        result.innerText = ` Not a Palindrome date. Next palindrome date comes in ${nextPalindromeDate.day}-${nextPalindromeDate.month}-${nextPalindromeDate.year} and you missed it by ${ctr} days`
+
+        console.log(nextPalindromeDate)
+
+    }
+}

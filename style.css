@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+
+:root {
+    --primary-color: #b56ca2;
+    --link-color: rgb(250, 250, 250);
+    --icon-color: #5C2271;
+    --icon-hover: #000000;
+}
+
+body {
+    text-align: center;
+    padding: 1rem;
+}
+
+h1 {
+    color: var(--icon-color);
+    font-size: 3rem;
+    text-decoration: underline;
+}
+
+p {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: xx-large;
+    font-weight: bolder;
+}
+
+input {
+    padding: 1rem;
+    margin: 1px;
+    border: 2px solid var(--icon-color);
+    width: 10rem;
+    height: 2rem;
+    font-size: x-large;
+    border-radius: 2rem;
+}
+
+#submit {
+
+    background-color: var(--primary-color);
+    width: 8rem;
+    height: 2rem;
+    padding: 2px;
+
+}
+
+#result {
+    font-size: x-large;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+footer,
+#footer {
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    font-size: large;
+}
+
+.fa,
+.material-icons {
+    font-size: 48px;
+    color: var(--icon-hover);
+
+}
+
+.fa:hover,
+.material-icons:hover {
+    color: var(--icon-color);
+
+}
