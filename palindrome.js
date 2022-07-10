@@ -145,8 +145,8 @@ function clickHandler() {
         month: Number(birthday.value.slice(5, 7)),
         year: Number(birthday.value.slice(0, 4))
     }
-    console.log(date)
-    console.log(birthday.value)
+    // console.log(date)
+    // console.log(birthday.value)
 
     var dateString = dateConversionToString(date)
     var list = checkPalindromeForAllDateFormats(dateString)
@@ -160,14 +160,14 @@ function clickHandler() {
     }
 
     if (flag === true) {
-        result.innerText = "YAYYYY .. your birthday is palindrome"
-        console.log("YAYYYY .. your birthday is palindrome")
+        result.innerText = "YAYYYY 😀 your birthday is palindrome"
+        // console.log("YAYYYY 😀 your birthday is palindrome")
     } else {
         var [ctr, nextPalindromeDate] = getNextPalindromeDate(dateString)
 
-        result.innerText = ` Not a Palindrome date. Next palindrome date comes in ${nextPalindromeDate.day}-${nextPalindromeDate.month}-${nextPalindromeDate.year} and you missed it by ${ctr} days`
+        result.innerText = ` Not a Palindrome date 😔 Next palindrome date comes in ${nextPalindromeDate.day}-${nextPalindromeDate.month}-${nextPalindromeDate.year} and you missed it by ${ctr} days`
 
-        console.log(nextPalindromeDate)
+        // console.log(nextPalindromeDate)
 
     }
 }

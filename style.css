@@ -17,6 +17,12 @@ h1 {
     color: var(--icon-color);
     font-size: 3rem;
     text-decoration: underline;
+    letter-spacing: 2px;
+    word-spacing: 2px;
+    -webkit-box-shadow: inset 7px 5px 27px 3px rgba(181, 108, 162, 0.61);
+    box-shadow: inset 7px 5px 27px 3px rgba(181, 108, 162, 0.61);
+    padding: 5px;
+
 }
 
 p {
@@ -28,7 +34,7 @@ p {
 input {
     padding: 1rem;
     margin: 1px;
-    border: 2px solid var(--icon-color);
+    border: 2px inset var(--icon-color);
     width: 10rem;
     height: 2rem;
     font-size: x-large;
@@ -39,7 +45,7 @@ input {
 
     background-color: var(--primary-color);
     width: 8rem;
-    height: 2rem;
+    height: 2.1rem;
     padding: 2px;
 
 }
@@ -47,6 +53,8 @@ input {
 #result {
     font-size: x-large;
     font-family: 'Times New Roman', Times, serif;
+    font-variant: small-caps;
+
 }
 
 footer,
