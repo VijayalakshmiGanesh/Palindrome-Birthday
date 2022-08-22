@@ -140,6 +140,10 @@ submit.addEventListener("click", clickHandler)
 
 function clickHandler() {
 
+    if (birthday.value == 0) {
+        alert("Enter all neccessary values")
+        return
+    }
     var date = {
         day: Number(birthday.value.slice(8, 10)),
         month: Number(birthday.value.slice(5, 7)),
